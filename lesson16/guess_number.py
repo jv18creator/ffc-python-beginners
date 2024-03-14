@@ -9,12 +9,13 @@ parser.add_argument("-n", "--name", help="Player name", required=True)
 player_wins = 0
 game_count = 0
 
+args = parser.parse_args()
+playername = args.name
 
-def guess_my_number():
+
+def guess_my_number(player_name="PlayerOne"):
     global player_wins
     global game_count
-    args = parser.parse_args()
-    player_name = args.name
     print(f"{player_name}, guess which number I'm thinking of... 1, 2, or 3.")
 
     player_input = input("\n")
@@ -54,9 +55,13 @@ def guess_my_number():
             break
 
     if playagain == "y":
-        guess_my_number()
+        guess_my_number(player_name=player_name)
     else:
-        sys.exit(f"Thanks for playing, bye {player_name}.")
+        if __name__ == "__main__":
+            sys.exit(f"Thanks for playing, bye {player_name}.")
+        else:
+            return
 
 
-guess_my_number()
+if __name__ == "__main__":
+    guess_my_number(playername)
